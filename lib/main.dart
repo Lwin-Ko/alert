@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'ThemeData.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return new MaterialApp(
-      theme: buildTheme(),
+      theme: buildThemeData(),
       debugShowCheckedModeBanner: false,
       title: 'Login Localhost',
       home: new MyHomePage(),
@@ -26,22 +26,6 @@ class MyApp extends StatelessWidget {
         '/MemberPage': (BuildContext context)=> new MemberPage(username: username,),
         '/MyHomePage': (BuildContext context)=> new MyHomePage(),
       },
-    );
-  }
-
-  ThemeData buildTheme() {
-    final ThemeData base = ThemeData();
-    return base.copyWith(
-      hintColor: Colors.purple,
-      primaryColor: Colors.yellow,
-      inputDecorationTheme: InputDecorationTheme(
-        hintStyle: TextStyle(
-          color: Colors.blue,
-        ),
-        labelStyle: TextStyle(
-          color: Colors.green,
-        ),
-      ),
     );
   }
 }
@@ -91,13 +75,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(title: Text("Login"),),
 
       body: Container(
-        decoration: new BoxDecoration(color: Colors.black),
+        decoration: new BoxDecoration(color: Colors.white),
 //        margin: EdgeInsets.all(30),
-        padding: const EdgeInsets.all(30.0),
+        padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Column(
 
@@ -133,21 +117,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
               new Padding(padding: EdgeInsets.only(top: 30.0)),
 
-              new Text('Login Here', style: new TextStyle(
-                    shadows: <Shadow>[
-                      Shadow(
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 2.0,
-                        color: Color.fromARGB(255, 0, 0, 0),
-                      ),
-//                      Shadow(
-//                        offset: Offset(10.0, 10.0),
-//                        blurRadius: 2.0,
-//                        color: Color.fromARGB(125, 0, 0, 255),
-//                      ),
-                    ],
-                  color: hexToColor("#F2A03D"), fontSize: 25.0),),
-
+              Center(
+                child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset('images/uit.gif'),
+                ),
+              ),
               new Padding(padding: EdgeInsets.only(top: 50.0)),
 
 
@@ -159,13 +135,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide(color: Colors.red)
+                      borderSide: BorderSide(color: Colors.black)
                   ),
 
 
                   labelText: "Username",
                   prefixIcon: const Icon(Icons.person, color: Colors.green,),
-                  fillColor: Colors.white,
+                  fillColor: Colors.black,
                   border: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(25.0),
                     borderSide: new BorderSide(
@@ -177,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 keyboardType: TextInputType.emailAddress,
                 style: new TextStyle(
                   fontFamily: "Poppins",
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
 
@@ -193,11 +169,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration: new InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide(color: Colors.red)
+                      borderSide: BorderSide(color: Colors.black)
                   ),
                   labelText: "Password",
                   prefixIcon: const Icon(Icons.remove_red_eye , color: Colors.green,),
-                  fillColor: Colors.white,
+                  fillColor: Colors.black,
                   border: new OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(25.0),
                     borderSide: new BorderSide(
@@ -208,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 style: new TextStyle(
                   fontFamily: "Poppins",
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
 
