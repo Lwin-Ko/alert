@@ -1,0 +1,234 @@
+import 'package:flutter/material.dart';
+import '../widgets/widgets.dart';
+
+class Form2 extends StatefulWidget {
+  const Form2({Key key, String username}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _State();
+}
+
+class _State extends State<Form2> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String nrcCode = '၁၂/';
+  String citizenCode = '(နိုင်)';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(title: Text('Student Registration')),
+        resizeToAvoidBottomPadding: false,
+        body: SingleChildScrollView(
+          child: new Form(
+            key: _formKey,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'လူမျိုး',
+                      prefixIcon: Icon(Icons.info),
+                    ),
+                    validator: (String value) {
+                      if (value.trim().isEmpty) {
+                        return 'လူမျိုးထည့်ရန်လိုသည်';
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'ကိုးကွယ်သည့်ဘာသာ',
+                      prefixIcon: Icon(Icons.info),
+                    ),
+                    validator: (String value) {
+                      if (value.trim().isEmpty) {
+                        return 'ဘာသာထည့်ရန်လိုသည်';
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'မွေးဖွားရာဇာတိ',
+                      prefixIcon: Icon(Icons.info),
+                    ),
+                    validator: (String value) {
+                      if (value.trim().isEmpty) {
+                        return 'ဇာတိထည့်ရန်လိုသည်';
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'မြို့နယ်',
+                      prefixIcon: Icon(Icons.info),
+                    ),
+                    validator: (String value) {
+                      if (value.trim().isEmpty) {
+                        return 'မြို့နယ်ထည့်ရန်လိုသည်';
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'ပြည်နယ်/တိုင်းဒေသကြီး',
+                      prefixIcon: Icon(Icons.info),
+                    ),
+                    validator: (String value) {
+                      if (value.trim().isEmpty) {
+                        return 'ပြည်နယ်/တိုင်းဒေသကြီးထည့်ရန်လိုသည်';
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  Text('မှတ်ပုံတင်အမှတ်'),
+                  const SizedBox(height: 8.0),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          // use this to match the Flex size..., is like using Expanded.
+                          width: double.infinity,
+                          // container defines the BoxConstrains of the children
+                          decoration: BoxDecoration(
+                            color: Colors.white24,
+                            border: Border.all(color: Colors.white, width: 1),
+                          ),
+
+                          child: DropdownButton<String>(
+                            hint: Text("၁၂/"),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                nrcCode = newValue;
+                              });
+                            },
+                            underline: Container(),
+                            items: <String>[
+                              '၁/',
+                              '၂/',
+                              '၃/',
+                              '၄/',
+                              '၅/',
+                              '၆/',
+                              '၇/',
+                              '၈/',
+                              '၉/',
+                              '၁၀/',
+                              '၁၁/',
+                              '၁၂/',
+                              '၁၃/',
+                              '၁၄/'
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          // use this to match the Flex size..., is like using Expanded.
+                          width: double.infinity,
+                          // container defines the BoxConstrains of the children
+                          decoration: BoxDecoration(
+                            color: Colors.white24,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: DropdownButton<String>(
+                            hint: Text("မဂတ"),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                citizenCode = newValue;
+                              });
+                            },
+                            underline: Container(),
+                            items: <String>['မဂတ', 'လမတ']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          // use this to match the Flex size..., is like using Expanded.
+                          width: double.infinity,
+                          // container defines the BoxConstrains of the children
+                          decoration: BoxDecoration(
+                            color: Colors.white24,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: DropdownButton<String>(
+                            hint: Text("နိုင်"),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                citizenCode = newValue;
+                              });
+                            },
+                            underline: Container(),
+                            items: <String>['နိုင်', 'ဧည့်']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: Container(
+                          // use this to match the Flex size..., is like using Expanded.
+                          width: double.infinity,
+                          // container defines the BoxConstrains of the children
+
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              hintText: '၁၁၀၂၀၃',
+                            ),
+                            validator: (String value) {
+                              if (value.trim().isEmpty) {
+                                return 'မှတ်ပုံတင်အမှတ်ထည့်ရန်လိုသည်';
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: OutlineButton(
+                      highlightedBorderColor: Colors.black,
+                      onPressed: _submit,
+                      child: Center(child: Text('NEXT')),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ));
+  }
+
+  void _submit() {
+    if (_formKey.currentState.validate()) {
+      print('Form submitted');
+    }
+  }
+}

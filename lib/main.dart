@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 import 'AdminPage.dart';
 import 'MemberPage.dart';
-import 'model/form_fields_example_form.dart';
+import 'model/Form1.dart';
 
 void main() => runApp(new MyApp());
 
@@ -21,12 +21,10 @@ class MyApp extends StatelessWidget {
       title: 'Login Localhost',
       home: new MyHomePage(),
       routes: <String, WidgetBuilder>{
-        '/AdminPage': (BuildContext context) => new AdminPage(
+        '/AdminPage': (BuildContext context) => new MemberPage(
               username: username,
             ),
-        '/MemberPage': (BuildContext context) => new FormFieldsExampleForm(
-              username: username,
-            ),
+        '/MemberPage': (BuildContext context) => new Form1(username: username),
         '/MyHomePage': (BuildContext context) => new MyHomePage(),
       },
     );
