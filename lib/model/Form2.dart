@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/widgets.dart';
+import '../NRC_db/getNRC.dart';
 
 class Form2 extends StatefulWidget {
   const Form2({Key key, String username}) : super(key: key);
@@ -10,8 +11,20 @@ class Form2 extends StatefulWidget {
 
 class _State extends State<Form2> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String nrcCode = '၁၂/';
-  String citizenCode = '(နိုင်)';
+
+  getNRC nrc = getNRC();
+
+  List<String> _codes = [".."];
+  List<String> _codeNames = [".."];
+  String _selectedCode ;
+  String _selectedCodeName;
+  String newValue ;
+
+  @override
+  void initState() {
+    _codes = List.from(_codes)..addAll(nrc.getCodes());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,34 +116,16 @@ class _State extends State<Form2> {
                           ),
 
                           child: DropdownButton<String>(
-                            hint: Text("၁၂/"),
-                            onChanged: (String newValue) {
-                              setState(() {
-                                nrcCode = newValue;
-                              });
-                            },
-                            underline: Container(),
-                            items: <String>[
-                              '၁/',
-                              '၂/',
-                              '၃/',
-                              '၄/',
-                              '၅/',
-                              '၆/',
-                              '၇/',
-                              '၈/',
-                              '၉/',
-                              '၁၀/',
-                              '၁၁/',
-                              '၁၂/',
-                              '၁၃/',
-                              '၁၄/'
-                            ].map<DropdownMenuItem<String>>((String value) {
+                            isExpanded: true,
+                            hint: Text('၁၂/'),
+                            items: _codes.map((String dropDownStringItem) {
                               return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
+                                value: dropDownStringItem,
+                                child: Text(dropDownStringItem),
                               );
                             }).toList(),
+                            onChanged: (value) => _onSelectedCode(value),
+                            value: _selectedCode,
                           ),
                         ),
                       ),
@@ -145,20 +140,17 @@ class _State extends State<Form2> {
                             border: Border.all(color: Colors.white, width: 2),
                           ),
                           child: DropdownButton<String>(
-                            hint: Text("မဂတ"),
-                            onChanged: (String newValue) {
-                              setState(() {
-                                citizenCode = newValue;
-                              });
-                            },
-                            underline: Container(),
-                            items: <String>['မဂတ', 'လမတ']
-                                .map<DropdownMenuItem<String>>((String value) {
+                            isExpanded: true,
+                            hint: Text('မဂတ'),
+                            items: _codeNames.map((String dropDownStringItem) {
                               return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
+                                value: dropDownStringItem,
+                                child: Text(dropDownStringItem),
                               );
                             }).toList(),
+                            // onChanged: (value) => print(value),
+                            onChanged: (value) => _onSelectedCodeName(value),
+                            value: _selectedCodeName,
                           ),
                         ),
                       ),
@@ -172,22 +164,23 @@ class _State extends State<Form2> {
                             color: Colors.white24,
                             border: Border.all(color: Colors.white, width: 2),
                           ),
-                          child: DropdownButton<String>(
-                            hint: Text("နိုင်"),
-                            onChanged: (String newValue) {
-                              setState(() {
-                                citizenCode = newValue;
-                              });
-                            },
-                            underline: Container(),
-                            items: <String>['နိုင်', 'ဧည့်']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
+                          child:DropdownButton<String>(
+                              hint: Text('(နိုင်)'),
+                              onChanged: (String changedValue) {
+                                newValue=changedValue;
+                                setState(() {
+                                  newValue;
+                                  print(newValue);
+                                });
+                              },
+                              value: newValue,
+                              items: <String>['(နိုင်)', '(ဧည့်)', '(ပြု)']
+                                  .map((String value) {
+                                return new DropdownMenuItem<String>(
+                                  value: value,
+                                  child: new Text(value),
+                                );
+                              }).toList()),
                         ),
                       ),
                       Flexible(
@@ -231,4 +224,18 @@ class _State extends State<Form2> {
       print('Form submitted');
     }
   }
+
+  void _onSelectedCode(String value) {
+    setState(() {
+      _selectedCodeName = "..";
+      _codeNames = [".."];
+      _selectedCode = value;
+      _codeNames = List.from(_codeNames)..addAll(nrc.getNameByCode(value));
+    });
+  }
+
+  void _onSelectedCodeName(String value) {
+    setState(() => _selectedCodeName = value);
+  }
+
 }

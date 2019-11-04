@@ -66,6 +66,7 @@ class _State extends State<Form1> {
                       labelText: 'တက္ကသိုလ်မှတ်ပုံတင်အမှတ်',
                       prefixIcon: Icon(Icons.info),
                     ),
+                    keyboardType:TextInputType.number,
                     validator: (String value) {
                       if (value.trim().isEmpty) {
                         return 'တက္ကသိုလ်မှတ်ပုံတင်အမှတ်ထည့်ရန်လိုသည်';
@@ -78,6 +79,7 @@ class _State extends State<Form1> {
                       labelText: 'တက္ကသိုလ်ဝင်ရောက်သည့်ခုနှစ်',
                       prefixIcon: Icon(Icons.info),
                     ),
+                    keyboardType:TextInputType.number,
                     validator: (String value) {
                       if (value.trim().isEmpty) {
                         return 'တက္ကသိုလ်ဝင်ရောက်သည့်ခုနှစ်ထည့်ရန်လိုသည်';
